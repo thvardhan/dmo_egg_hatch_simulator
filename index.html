@@ -58,19 +58,19 @@
                 <form action="#">
                   <p>
                     <label>
-                      <input name="group2" type="radio" checked />
+                      <input value="normal" name="group2" type="radio"  v-model:checked="eggStyle"/>
                       <span>Mercenary Egg</span>
                     </label>
                   </p>
                   <p>
                     <label>
-                      <input name="group2" type="radio" />
+                      <input value="three" name="group2" type="radio" v-model:checked="eggStyle"/>
                       <span>Reinforced Egg Level 3</span>
                     </label>
                   </p>
                   <p>
                     <label>
-                      <input name="group2" type="radio" />
+                      <input value="four" name="group2" type="radio" v-model:checked="eggStyle" />
                       <span>Reinforced Egg Level 4</span>
                     </label>
                   </p>
@@ -79,7 +79,7 @@
                     <div class="col s5 m7 l6">
                       <p>
                         <label>
-                          <input type="checkbox" class="filled-in" checked="checked" />
+                          <input value="animate" type="checkbox" class="filled-in" v-model:checked="animate" />
                           <span>Animate</span>
                         </label>
                       </p>
@@ -87,7 +87,7 @@
                     <div class="col s7 m5 l6">
                       <p>
                         <label>
-                          <input type="checkbox" class="filled-in" />
+                          <input type="checkbox" class="filled-in" v-model:checked="auto" />
                           <span>Auto Hatch</span>
                         </label>
                       </p>
@@ -96,33 +96,33 @@
                   <div class="row">
                     <div class="col s5 m7 l6">
                       <label>
-                        <input type="checkbox" class="filled-in" />
+                        <input type="checkbox" class="filled-in" v-model:checked="hatchBackup" />
                         <span>Hatch backup after level</span>
                       </label>
                     </div>
                     <div class="col s7 m5 l6">
                       <p class="range-field">
-                        <input type="range" min="1" max="4" />
+                        <input id="find" type="range" min="1" max="5" v-model:valueAsNumber="hatchBupLevel" />
                       </p>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col s5 m7 l6">
                       <label>
-                        <input type="checkbox" class="filled-in" checked="checked" />
+                        <input type="checkbox" class="filled-in" checked="checked" v-model:checked="goal"/>
                         <span>Goal is to reach level</span>
                       </label>
                     </div>
                     <div class="col s7 m5 l6">
                       <p class="range-field">
-                        <input type="range" min="1" max="5" />
+                        <input type="range" min="1" max="5" v-model:valueAsNumber="goalLevel"/>
                       </p>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input value="100" id="first_name2" type="number" class="validate">
-                      <label class="active" for="first_name2">Goal reach times (only works if auto hatch is checked)</label>
+                      <input v-model:value="reachLevelTimes" id="goalN" type="number" class="validate">
+                      <label class="active" for="goalN">Goal reach times (only works if auto hatch is checked)</label>
                     </div>
                   </div>
                 </form>
