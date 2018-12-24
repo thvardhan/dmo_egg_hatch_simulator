@@ -25,7 +25,7 @@
               <img :src="incubatorImg">
             </div>
           </div>
-          <a href="#" @click="changeIncubator()" class="hatch">Hatch</a>
+          <a @click="changeIncubator()" class="hatch">Data Input</a>
           <div class="card yellow lighten-5" v-if="showDataWarning">
             <div class="card-content black-text">
               <p>Mid data will be used after level 3 or 4 for Reinforced eggs</p>
@@ -206,6 +206,7 @@
           </div>
         </div>
       </div>
+
       <div class="card">
         <div class="row">
           <div class="col s10 offset-s1">
@@ -218,13 +219,53 @@
     </div>
   </div>
 </body>
+
+<footer class="page-footer blue lighten-2 center">
+          <div class="container">
+                <h5 class="white-text">Thank you!</h5>
+                <p class="grey-text text-lighten-4">Thank you for using this simulator. I would like to tell any user that this app is not affilated with any version of digimon masters online. The hatch rates here are not official and are actually the avarage of many player's hatching experience from the game.This app's sole intention is to provide a simulator so that they can decide whether they should buy cash eggs or get mercenary eggs or just want to test their luck out.</p>
+                <p><b>Note : This is not a hack and would not affect your gameplay. Hatching any digimon here will not add it to your account.</b></p>
+          </div>
+          <div class="footer-copyright text-center center">
+            <div class="container">
+            made by thvardhan, should you have any problem please contact me at : thvardhan.god@gmail.com
+            </div>
+          </div>
+        </footer>
+
+
 <script type="text/javascript" src="js/digimonObjects.js"></script>
-<script type="text/javascript" src="js/initChart.js"></script>
 <script type="text/javascript" src="js/initUI.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/Chart.min.js"></script>
+<script type="text/javascript" src="js/initChart.js"></script>
 <script src="./js/vue.js"></script>
 <script type="text/javascript" src="./js/interaction.js"></script>
-
+<script type="text/javascript">
+var ctx = document.getElementById('myChart').getContext('2d');
+   var myLineChart = new Chart(ctx, {
+       type: 'bar',
+       data: {
+           labels: [],
+           datasets: [{
+               label: "Hatch plot w.r.t. Time",
+               fill:false,
+               borderColor:'rgb(255, 99, 132)',
+               backgroundColor:'rgb(58,248,248)',
+               data: []
+           }]
+       },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 5
+                }
+            }]
+        }
+    }
+   });
+</script>
 </html>

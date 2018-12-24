@@ -13,7 +13,8 @@ var rootVue = new Vue({
     goal : false,
     goalLevel : 4,
     reachLevelTimes : 50,
-    levelInIncubator : 0
+    levelInIncubator : 0,
+    inputTime : 0
   },
   methods : {
     changeIncubator : function(){
@@ -33,7 +34,7 @@ var rootVue = new Vue({
       M.toast({html: 'Already at max level'})
     }
     else
-     processIncubator(eggDetails,eggStyle,this.levelInIncubator,true)
+     processIncubator(eggDetails,eggStyle,this.levelInIncubator,true,++this.inputTime)
     }
   },
   computed : {
@@ -45,7 +46,6 @@ var rootVue = new Vue({
   },
   watch : {
     eggStyle : function(){
-      console.log(this.eggStyle)
       if(!(this.eggStyle === 'normal'))
         this.showDataWarning = true
       else
@@ -56,8 +56,9 @@ var rootVue = new Vue({
 })
 
 
-function processIncubator(eggDetails,styleOfEgg,levelInIncubator,showNotif) {
+function processIncubator(eggDetails,styleOfEgg,levelInIncubator,showNotif,inputTime) {
   let randChance = Math.random() * 100
+   console.log(inputTime)
 //  console.log(chances,randChance,eggDetails,styleOfEgg,levelInIncubator)
   let lookforLevel = levelInIncubator+1
   let chances= {}
@@ -83,11 +84,13 @@ function processIncubator(eggDetails,styleOfEgg,levelInIncubator,showNotif) {
 
   if(styleOfEgg === "three" && levelInIncubator < 3){
     levelInIncubator++
+    addData(inputTime,levelInIncubator)
     rootVue.levelInIncubator = levelInIncubator
     return
   }
   if(styleOfEgg === "four" && levelInIncubator < 4){
     levelInIncubator++
+    addData(inputTime,levelInIncubator)
       rootVue.levelInIncubator = levelInIncubator
     return
   }
@@ -96,15 +99,18 @@ function processIncubator(eggDetails,styleOfEgg,levelInIncubator,showNotif) {
     if(showNotif)
      M.toast({html: 'Data adding for level '+(levelInIncubator+1)+' is successful'})
     levelInIncubator++
+    addData(inputTime,levelInIncubator)
   } else if (randChance > chances.eggSuccess && randChance <= chances.eggBreak + chances.eggSuccess) {
     if(showNotif)
     M.toast({html: 'Data adding for level '+(levelInIncubator+1)+' broke the egg'})
-
+    addData(inputTime,0)
     levelInIncubator = 0
   } else {
+    if(showNotif)
     M.toast({html: 'Data adding for level '+(levelInIncubator+1)+' failed'})
+    addData(inputTime,levelInIncubator)
   }
-
+  rootVue.inputTime = inputTime
   rootVue.levelInIncubator = levelInIncubator
 
 }
@@ -136,4 +142,12 @@ function getSelectedEggDetails() {
 
 
   return found? details : undefined
+}
+
+function addData(label, data) {
+    myLineChart.data.labels.push(label);
+    myLineChart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    myLineChart.update();
 }
