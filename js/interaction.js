@@ -97,17 +97,17 @@ function processIncubator(eggDetails,styleOfEgg,levelInIncubator,showNotif,input
 
   if (randChance <= chances.eggSuccess) {
     if(showNotif)
-     M.toast({html: 'Data adding for level '+(levelInIncubator+1)+' is successful'})
+     M.toast({html: 'Data adding for level '+(levelInIncubator+1)+' is successful',displayLength:'700'})
     levelInIncubator++
     addData(inputTime,levelInIncubator)
   } else if (randChance > chances.eggSuccess && randChance <= chances.eggBreak + chances.eggSuccess) {
     if(showNotif)
-    M.toast({html: 'Data adding for level '+(levelInIncubator+1)+' broke the egg'})
+    M.toast({html: 'Data adding for level '+(levelInIncubator+1)+' broke the egg',displayLength:'700'})
     addData(inputTime,0)
     levelInIncubator = 0
   } else {
     if(showNotif)
-    M.toast({html: 'Data adding for level '+(levelInIncubator+1)+' failed'})
+    M.toast({html: 'Data adding for level '+(levelInIncubator+1)+' failed',displayLength:'700'})
     addData(inputTime,levelInIncubator)
   }
   rootVue.inputTime = inputTime
