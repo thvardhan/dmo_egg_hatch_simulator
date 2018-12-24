@@ -11,7 +11,6 @@
 
 <body class="teal lighten-5">
   <div id="appRoot" class="">
-    <button type="button" @click="hello" name="button"></button>
     <nav>
       <div class="nav-wrapper blue lighten-2">
         <a href="#!" class="brand-logo center">DMO Incubator</a>
@@ -23,13 +22,13 @@
         <div class="col s12 m6 l6">
           <div class="card">
             <div class="card-image">
-              <img src="img/incubator.png">
+              <img :src="incubatorImg">
             </div>
           </div>
-          <a href="#" class="hatch">Hatch</a>
-          <div class="card yellow lighten-5">
+          <a href="#" @click="changeIncubator()" class="hatch">Hatch</a>
+          <div class="card yellow lighten-5" v-if="showDataWarning">
             <div class="card-content black-text">
-              <p>Mid data will be used after level 3 for Reinforced eggs</p>
+              <p>Mid data will be used after level 3 or 4 for Reinforced eggs</p>
             </div>
           </div>
         </div>
@@ -77,7 +76,7 @@
                   <br>
                   <div class="row">
                     <div class="col s5 m7 l6">
-                      <p>
+                      <p v-if="!removeDevFeatures">
                         <label>
                           <input value="animate" type="checkbox" class="filled-in" v-model:checked="animate" />
                           <span>Animate</span>
@@ -85,7 +84,7 @@
                       </p>
                     </div>
                     <div class="col s7 m5 l6">
-                      <p>
+                      <p v-if="!removeDevFeatures">
                         <label>
                           <input type="checkbox" class="filled-in" v-model:checked="auto" />
                           <span>Auto Hatch</span>
@@ -93,7 +92,7 @@
                       </p>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row" v-if="!removeDevFeatures">
                     <div class="col s5 m7 l6">
                       <label>
                         <input type="checkbox" class="filled-in" v-model:checked="hatchBackup" />
@@ -106,7 +105,7 @@
                       </p>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row" v-if="!removeDevFeatures">
                     <div class="col s5 m7 l6">
                       <label>
                         <input type="checkbox" class="filled-in" checked="checked" v-model:checked="goal"/>
@@ -119,7 +118,7 @@
                       </p>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row" v-if="!removeDevFeatures">
                     <div class="input-field col s12">
                       <input v-model:value="reachLevelTimes" id="goalN" type="number" class="validate">
                       <label class="active" for="goalN">Goal reach times (only works if auto hatch is checked)</label>
