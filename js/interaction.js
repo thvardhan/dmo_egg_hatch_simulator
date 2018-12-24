@@ -1,12 +1,12 @@
-new Vue({
+var rootVue = new Vue({
   el : '#appRoot',
   data : {
     eggName : ''
   },
   methods : {
     hello : function(){
-      alert(12);
+      alert(this.eggName);
     }
-  }
+  },
 
 })
